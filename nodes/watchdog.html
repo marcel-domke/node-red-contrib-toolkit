@@ -1,0 +1,55 @@
+<!--
+Copyright 2024 Marcel Domke
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType('watchdog', {
+        category: 'Toolkit',
+        color: '#e6e0f8',
+        defaults: {
+            name: { value: "" },
+            timeout: { value: 10, required: true, validate: RED.validators.number() }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'font-awesome/fa-clock-o',
+        label: function() {
+            return this.name || 'watchdog';
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="watchdog">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timeout"><i class="fa fa-clock-o"></i> Timeout (seconds)</label>
+        <input type="number" id="node-input-timeout" placeholder="Timeout in seconds" min="1">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="watchdog">
+    <p>A Watchdog node that resets a timer each time it receives a <b>true</b> payload. If no <b>true</b> payload is received within the specified timeout period, the node sends a <b>false</b> payload.</p>
+    <p>Input:</p>
+    <ul>
+        <li><b>msg.payload</b> or <b>msg.payload.online</b>: Should be <b>true</b> to reset the timer.</li>
+    </ul>
+    <p>Output:</p>
+    <ul>
+        <li><b>msg.payload</b>: <b>true</b> when the timer is reset, and <b>false</b> when the timer expires.</li>
+    </ul>
+</script>

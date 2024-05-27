@@ -1,0 +1,77 @@
+<!--
+Copyright 2024 Marcel Domke
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType('whitelist', {
+        category: 'Toolkit',
+        color: '#e2d96e',
+        defaults: {
+            name: { value: "" },
+            filters: { value: "" },
+            filterPayload: { value: true },
+            filterTopic: { value: false }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.png",
+        label: function () {
+            return this.name || "whitelist";
+        },
+        oneditprepare: function () {
+            $("#node-input-name").val(this.name);
+            $("#node-input-filters").val(this.filters);
+            $("#node-input-filter-payload").prop('checked', this.filterPayload);
+            $("#node-input-filter-topic").prop('checked', this.filterTopic);
+        },
+        oneditsave: function () {
+            this.name = $("#node-input-name").val();
+            this.filters = $("#node-input-filters").val();
+            this.filterPayload = $("#node-input-filter-payload").is(':checked');
+            this.filterTopic = $("#node-input-filter-topic").is(':checked');
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="whitelist">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-filters"><i class="fa fa-list"></i> Filter Strings</label>
+        <input type="text" id="node-input-filters" placeholder="Enter comma-separated strings">
+    </div>
+    <div class="form-row">
+        <label for="node-input-filter-payload">
+            <input type="checkbox" id="node-input-filter-payload"> Filter Payload
+        </label>
+    </div>
+    <div class="form-row">
+        <label for="node-input-filter-topic">
+            <input type="checkbox" id="node-input-filter-topic"> Filter Topic
+        </label>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="whitelist">
+    <p>Allows messages based on the configured whitelist of strings. If a string is found in the payload or topic, the message is allowed.</p>
+    <p>Configuration options:</p>
+    <ul>
+        <li><b>Filter Strings</b>: Comma-separated list of strings to allow.</li>
+        <li><b>Filter Payload</b>: Whether to allow strings in the payload.</li>
+        <li><b>Filter Topic</b>: Whether to allow strings in the topic.</li>
+    </ul>
+</script>

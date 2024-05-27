@@ -1,0 +1,32 @@
+{
+  "name": "node-red-contrib-toolkit",
+  "version": "1.0.0",
+  "description": "A collection of useful Node-Red nodes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcel-domke/node-red-contrib-toolkit.git"
+  },
+  "keywords": ["node", "red", "toolkit", "tools", "whitelist", "blacklist", "watchdog", "ping", "case", "upper", "lower", "umlauts", "umlaute"],
+  "author": "Marcel Domke",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/marcel-domke/node-red-contrib-toolkit/issues"
+  },
+  "homepage": "https://github.com/marcel-domke/node-red-contrib-toolkit#readme",
+  "node-red": {
+    "nodes": {
+      "lower case": "nodes/lowerCase.js",
+      "upper case": "nodes/upperCase.js",
+      "replace umlauts": "nodes/replaceUmlauts.js",
+      "restore umlauts": "nodes/restoreUmlauts.js",
+      "ping": "nodes/ping.js",   
+      "watchdog": "nodes/watchdog.js",
+      "blacklist": "nodes/blacklist.js",
+      "whitelist":"nodes/whitelist.js"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<!--
+Copyright 2024 Marcel Domke
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType('ping', {
+        category: 'Toolkit',
+        color: '#c0c0c0',
+        defaults: {
+            name: { value: "" },
+            host: { value: "", required: false }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'font-awesome/fa-desktop',
+        label: function() {
+            return this.name || 'ping '+this.host;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ping">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-host"><i class="fa fa-desktop"></i> Host</label>
+        <input type="text" id="node-input-host" placeholder="Hostname or IP address">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ping">
+    <p>Performs a ping to the specified host and returns the result.</p>
+    <p>Input:</p>
+    <ul>
+        <li><b>msg.payload</b>: The hostname or IP address to ping if not specified in the configuration.</li>
+    </ul>
+    <p>Output:</p>
+    <ul>
+        <li><b>msg.payload</b>: An object containing:
+            <ul>
+                <li><b>host</b>: The host that was pinged</li>
+                <li><b>online</b>: Boolean indicating if the host is online (true) or offline (false)</li>
+                <li><b>response</b>: The response from the ping command as a string</li>
+            </ul>
+        </li>
+    </ul>
+</script>
+
